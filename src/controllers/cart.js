@@ -1,5 +1,5 @@
 const Course = require("../models/courseModel")
-const Cart = require("../models/CartModel")
+const Cart = require("../models/cartModel")
 const ErrorResponse = require("../utils/errorResponse")
 const asyncHandler = require("../middleware/asyncHandler")
 
