@@ -5,13 +5,12 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-  
     "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
-  "engines":{
-    "node":"16.14.0"
+  "engines": {
+    "node": "16.14.0"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -32,6 +31,6 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "nodemon": "2.0.20"
   }
 }
