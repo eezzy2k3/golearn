@@ -2,7 +2,7 @@ const Course = require("../models/courseModel")
 const ErrorResponse = require("../utils/errorResponse")
 const asyncHandler = require("../middleware/asyncHandler")
 const User = require("../models/UserModel")
-const Cart = require("../models/cartModel")
+const Cart = require("../models/CartModel")
 const Order = require("../models/OrderModel")
 const Flutterwave = require('flutterwave-node-v3');
 
