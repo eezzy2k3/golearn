@@ -56,6 +56,8 @@ const removeCourse = asyncHandler(async(req,res,next)=>{
 
     const cart = await Cart.findOne({user})
 
+    if(!cart) return next(new ErrorResponse(`No cart found`,404))
+
     const index = cart.course.findIndex(course=>course.courseId==courseId)
     console.log(index)
    
@@ -79,6 +81,8 @@ const emptyCart = asyncHandler(async(req,res,next)=>{
     const user = req.user.id
     
     const cart = await Cart.findOne({user})
+
+    if(!cart) return next(new ErrorResponse(`No cart found`,404))
     
     if(cart.course.length<1) return next(new ErrorResponse("No course in the cart",400))
    
