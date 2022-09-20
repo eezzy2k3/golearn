@@ -15,12 +15,12 @@ router.route("/")
 router.post("/uploadcontent/:id",authorize,access("publisher","admin"),upload.single("coursecontent"),uploadCourseContent)
 
 router.route("/:id")
-.post(updateCourse)
-.delete(deleteCourse)
+.put(authorize,access("publisher","admin"),updateCourse)
+.delete(authorize,access("publisher","admin"),deleteCourse)
 .get(getCourse)
 
 router.route("/:id/:contentId")
-.delete(deleteCourseContent)
-.put(upload.single("coursecontent"),updateCourseContent)
+.delete(authorize,access("publisher","admin"),deleteCourseContent)
+.put(authorize,access("publisher","admin"),upload.single("coursecontent"),updateCourseContent)
 
 module.exports = router

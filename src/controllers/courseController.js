@@ -28,6 +28,10 @@ const uploadCourseContent = asyncHandler(async(req,res,next)=>{
    
     const course = await Course.findById(id)
 
+    if(!course) return next(new ErrorResponse(`No course with the id of ${req.params.id}`,404))
+
+    if(course.publisher != req.user.id && req.user.role !== "admin") return next(new ErrorResponse("you cannot carry out this action",400))
+
     const title = req.body.title
 
     const uploader = async (path) => await cloudinary.uploads(path , 'coursecontent')
@@ -53,19 +57,27 @@ const uploadCourseContent = asyncHandler(async(req,res,next)=>{
 
 const updateCourse = asyncHandler(async(req,res,next)=>{
 
-    const course = await Course.findByIdAndUpdate(req.params.id,req.body,{new:true})
-   
+    const course = await Course.findById(req.params.id)
+
     if(!course) return next(new ErrorResponse(`No course with the id of ${req.params.id}`,404))
+    
+    if(course.publisher != req.user.id && req.user.role !== "admin") return next(new ErrorResponse("you cannot carry out this action",400))
+
+    course = await Course.findByIdAndUpdate(req.params.id,req.body,{new:true})
 
     res.status(200).json({success:true,data:course})
 })
 
 const deleteCourse = asyncHandler(async(req,res,next)=>{
-
-    const course = await Course.findByIdAndDelete(req.params.id)
    
+    const course = await Course.findById(req.params.id)
+
     if(!course) return next(new ErrorResponse(`No course with the id of ${req.params.id}`,404))
 
+    if(course.publisher != req.user.id && req.user.role !== "admin") return next(new ErrorResponse("you cannot carry out this action",400))
+
+    course = await Course.findByIdAndDelete(req.params.id)
+   
     res.status(200).json({success:true,data:{}})
 })
 
@@ -85,6 +97,8 @@ const deleteCourseContent = asyncHandler(async(req,res,next)=>{
     const contentId = req.params.contentId
 
     if(!course) return next(new ErrorResponse(`No course with the id of ${req.params.id}`,404))
+
+    if(course.publisher != req.user.id && req.user.role !== "admin") return next(new ErrorResponse("you cannot carry out this action",400))
 
     const index = course.courseContent.findIndex(courseContent=>courseContent._id==contentId)
 
@@ -106,6 +120,8 @@ const updateCourseContent = asyncHandler(async(req,res,next)=>{
     const contentId = req.params.contentId
 
     if(!course) return next(new ErrorResponse(`No course with the id of ${req.params.id}`,404))
+
+    if(course.publisher != req.user.id && req.user.role !== "admin") return next(new ErrorResponse("you cannot carry out this action",400))
 
     const index = course.courseContent.findIndex(courseContent=>courseContent._id==contentId)
 

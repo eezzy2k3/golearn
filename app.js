@@ -19,6 +19,8 @@ const cartRouter = require("./src/routers/cartRoute")
 
 const oredrRouter = require("./src/routers/orderRouter")
 
+const userRouter = require("./src/routers/userRoute")
+
 
 const mongoSanitize = require('express-mongo-sanitize')
 
@@ -71,6 +73,7 @@ app.use("/api/v1/auth",authRouter)
 app.use("/api/v1/reviews",reviewRouter)
 app.use("/api/v1/cart",cartRouter)
 app.use("/api/v1/order",oredrRouter)
+app.use("/api/v1/user",userRouter)
 
 
 
