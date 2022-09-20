@@ -57,7 +57,7 @@ const uploadCourseContent = asyncHandler(async(req,res,next)=>{
 
 const updateCourse = asyncHandler(async(req,res,next)=>{
 
-    const course = await Course.findById(req.params.id)
+    let course = await Course.findById(req.params.id)
 
     if(!course) return next(new ErrorResponse(`No course with the id of ${req.params.id}`,404))
     
@@ -70,7 +70,7 @@ const updateCourse = asyncHandler(async(req,res,next)=>{
 
 const deleteCourse = asyncHandler(async(req,res,next)=>{
    
-    const course = await Course.findById(req.params.id)
+    let course = await Course.findById(req.params.id)
 
     if(!course) return next(new ErrorResponse(`No course with the id of ${req.params.id}`,404))
 
