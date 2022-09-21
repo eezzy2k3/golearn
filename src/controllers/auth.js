@@ -116,7 +116,13 @@ const generateToken = asyncHandler(async(req,res,next)=>{
 
     
     //   create a message 
-    const message = `click on the link to reset password :\n\n ${req.protocol}://${req.get("host")}/api/v1/auth/resettoken/${user.resetToken}`
+    // const message = `click on the link to reset password :\n\n ${req.protocol}://${req.get("host")}/api/v1/auth/resettoken/${user.resetToken}`
+
+   const message = `<h1>Email Confirmation</h1>
+            <h2>Hello ${user.firstName}</h2>
+            <p>Please confirm your email by clicking on the following link</p>
+            <a href=\n\n ${req.protocol}://${req.get("host")}/api/v1/auth/resettoken/${user.resetToken}> Click here</a>
+            </div>`
 
     // send token to email
     try{
