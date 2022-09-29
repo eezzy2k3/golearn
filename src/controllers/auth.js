@@ -121,7 +121,7 @@ const generateToken = asyncHandler(async(req,res,next)=>{
    const message = `<h1>Password Reset</h1>
             <h2>Hello ${user.firstName}</h2>
             <p>Please reset your password by clicking on the following link</p>
-            <a href=localhost:3000/resetpassword/${user.resetToken}> Click here</a>
+            <a href=http://localhost:3000/resetpassword/${user.resetToken}> Click here</a>
             </div>`
 
     // send token to email
