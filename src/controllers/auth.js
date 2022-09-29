@@ -7,7 +7,7 @@ const asyncHandler = require("../middleware/asyncHandler")
 
 const register = asyncHandler( async(req,res,next)=>{
     
-    let {firstName,lastName,userName,email,password,role} = req.body
+    let {firstName,lastName,userName,email,password,role,phoneNumber} = req.body
 
     
     // check if email exist
@@ -22,7 +22,7 @@ const register = asyncHandler( async(req,res,next)=>{
     // hash password
     password = await bcrypt.hash(password,12)
 
-    const user =await User.create({firstName,lastName,userName,email,password,role})
+    const user =await User.create({firstName,lastName,userName,email,password,role,phoneNumber})
 
     if(!user)  return next(new ErrorResponse(`user could not be created`,500))
 
@@ -118,10 +118,10 @@ const generateToken = asyncHandler(async(req,res,next)=>{
     //   create a message 
     // const message = `click on the link to reset password :\n\n ${req.protocol}://${req.get("host")}/api/v1/auth/resettoken/${user.resetToken}`
 
-   const message = `<h1>Email Confirmation</h1>
+   const message = `<h1>Password Reset</h1>
             <h2>Hello ${user.firstName}</h2>
-            <p>Please confirm your email by clicking on the following link</p>
-            <a href=\n\n ${req.protocol}://${req.get("host")}/api/v1/auth/resettoken/${user.resetToken}> Click here</a>
+            <p>Please reset your password by clicking on the following link</p>
+            <a href=\n\n ${req.protocol}://${req.get("host")}/api/v1/auth/resetpassword/${user.resetToken}> Click here</a>
             </div>`
 
     // send token to email

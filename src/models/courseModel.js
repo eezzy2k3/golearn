@@ -59,6 +59,11 @@ const courseSchema = mongoose.Schema({
         type:Number,
         required:true,
         default:0
+    },
+    link:String,
+    tags:{
+        type:[String],
+        required:true
     }
 },{timestamps:true})
 

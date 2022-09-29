@@ -33,6 +33,10 @@ const userSchema = mongoose.Schema({
         enum:["user","publisher","admin"],
         default:"user"
     },
+    phoneNumber:{
+        type:String,
+        required:true
+    },
     resetToken:String,
     resetTokenExpire:Date
 },{timestamps:true})
