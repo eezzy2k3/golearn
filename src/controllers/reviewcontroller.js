@@ -9,6 +9,7 @@ const createReview = asyncHandler(async(req,res,next)=>{
     
     const course = req.params.courseId
     const user = req.user.id
+    const userName = req.user.userName
 
 
     // check if course exist
@@ -25,6 +26,7 @@ const createReview = asyncHandler(async(req,res,next)=>{
   
     req.body.course = course
     req.body.user = user
+    req.body.userName = userName
 
     // create new review
     review = await Review.create(req.body)

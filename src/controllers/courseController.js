@@ -216,6 +216,21 @@ const getAllcourses = asyncHandler(async(req,res,next)=>{
    res.status(200).json({success:true,Total:course.length,pagination,data:course})
 })
 
+const allCourseByAPublisher = asyncHandler(async (req,res,next)=>{
+   
+    const { page = 1, limit = 10 } = req.query
+   
+    const course = await Course.find({publisher:req.params.id})
+      .sort("CreatedAt")
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec()
+
+      if(course.length < 1) return next(new ErrorResponse("No course created by this publisher",404))
+  
+    res.status(200).json({success:true,Total:course.length,data:course})
+})
+
    
 
-module.exports = {craeteCourse,uploadCourseContent,updateCourse,deleteCourse,deleteCourseContent,getCourse,updateCourseContent,getAllcourses} 
+module.exports = {craeteCourse,uploadCourseContent,updateCourse,deleteCourse,deleteCourseContent,getCourse,updateCourseContent,getAllcourses,allCourseByAPublisher} 

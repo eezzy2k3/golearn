@@ -1,4 +1,4 @@
-const {craeteCourse,uploadCourseContent, updateCourse, deleteCourse, deleteCourseContent, getCourse, updateCourseContent, getAllcourses} = require("../controllers/courseController")
+const {craeteCourse,uploadCourseContent, updateCourse, deleteCourse, deleteCourseContent, getCourse, updateCourseContent, getAllcourses, allCourseByAPublisher} = require("../controllers/courseController")
 const express = require("express")
 const {authorize,access}= require("../middleware/auth")
 const upload = require("../utils/upload")
@@ -18,6 +18,8 @@ router.route("/:id")
 .put(authorize,access("publisher","admin"),updateCourse)
 .delete(authorize,access("publisher","admin"),deleteCourse)
 .get(getCourse)
+
+router.get("/publisher/:id",allCourseByAPublisher)
 
 router.route("/:id/:contentId")
 .delete(authorize,access("publisher","admin"),deleteCourseContent)

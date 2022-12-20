@@ -20,6 +20,9 @@ const reviewSchema = mongoose.Schema({
      course:{
         type:mongoose.Schema.ObjectId,
         ref:"Course"
+    },
+    userName:{
+      type:String
     }
 
 },{timestamps:true})
