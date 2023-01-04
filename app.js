@@ -63,7 +63,13 @@ const limiter = rateLimit({
 app.use(limiter)
 
 // allow cors
-app.use(cors())
+// app.use(cors())
+app.use(
+	cors({
+		origin: ["*", "https://golearn.onrender.com", "http://localhost:3000"],
+		credentials: true,
+	})
+);
 
 app.use(hpp())
 
