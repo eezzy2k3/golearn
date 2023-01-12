@@ -36,6 +36,9 @@ const userSchema = mongoose.Schema({
     phoneNumber:{
         type:String
     },
+    displayPicture:{
+        type:String
+    },
     resetToken:String,
     resetTokenExpire:Date
 },{timestamps:true})

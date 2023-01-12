@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken")
 const sendMail = require("../utils/sendMail")
 const ErrorResponse = require("../utils/errorResponse")
 const asyncHandler = require("../middleware/asyncHandler")
+const fs = require("fs")
+const cloudinary = require("../utils/cloudinary")
 
 const register = asyncHandler( async(req,res,next)=>{
     
@@ -170,7 +172,37 @@ const resetPassword = asyncHandler(async(req,res,next)=>{
     
 })
 
-module.exports = {register,login,getMe,changePassword,generateToken,resetPassword}
+const uploadDisplayPicture = asyncHandler(async(req,res,next)=>{
+
+    const id = req.user.id
+
+    const user = await User.findById(id)
+
+    if(!user) return next(new ErrorResponse("No user found",404))
+
+    const uploader = async (path) => await cloudinary.uploads(path , 'displaypicture')
+    
+    let url;
+ 
+    const file = req.file
+    
+    const {path} = file
+    
+    const newPath = await uploader(path)
+    
+    url = newPath.url
+    
+    fs.unlinkSync(path)
+
+    user.displayPicture = url.toString()
+
+    await user.save()
+
+    res.status(200).json({success:true,msg:"successfully uploaded display picture",data:user})
+
+})
+
+module.exports = {register,login,getMe,changePassword,generateToken,resetPassword,uploadDisplayPicture}
 
 
 
