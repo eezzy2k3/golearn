@@ -55,6 +55,37 @@ const uploadCourseContent = asyncHandler(async(req,res,next)=>{
     res.status(200).json({success:true,msg:"successfully uploaded course content",data:course})
 })
 
+const uploadCourseImage = asyncHandler(async(req,res,next)=>{
+   
+    const id = req.params.id
+   
+    const course = await Course.findById(id)
+
+    if(!course) return next(new ErrorResponse(`No course with the id of ${req.params.id}`,404))
+
+    if(course.publisher != req.user.id && req.user.role !== "admin") return next(new ErrorResponse("you cannot carry out this action",400))
+
+    const uploader = async (path) => await cloudinary.uploads(path , 'courseimage')
+    
+    let url;
+ 
+    const file = req.file
+    
+    const {path} = file
+    
+    const newPath = await uploader(path)
+    
+    url = newPath.url
+    
+    fs.unlinkSync(path)
+
+    course.courseImage = url.toString()
+
+    await course.save()
+
+    res.status(200).json({success:true,msg:"successfully uploaded course image",data:course})
+})
+
 const updateCourse = asyncHandler(async(req,res,next)=>{
 
     let course = await Course.findById(req.params.id)
@@ -233,4 +264,4 @@ const allCourseByAPublisher = asyncHandler(async (req,res,next)=>{
 
    
 
-module.exports = {craeteCourse,uploadCourseContent,updateCourse,deleteCourse,deleteCourseContent,getCourse,updateCourseContent,getAllcourses,allCourseByAPublisher} 
+module.exports = {craeteCourse,uploadCourseContent,updateCourse,deleteCourse,deleteCourseContent,getCourse,updateCourseContent,getAllcourses,allCourseByAPublisher,uploadCourseImage} 

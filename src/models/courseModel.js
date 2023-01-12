@@ -64,7 +64,10 @@ const courseSchema = mongoose.Schema({
     tags:{
         type:[String],
         required:true
-    }
+    },
+    courseImage:{
+        type:String
+    },
 },{timestamps:true})
 
 const Course = mongoose.model("Course",courseSchema)
