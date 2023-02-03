@@ -30,15 +30,20 @@ const uploadCourseContent = asyncHandler(async(req,res,next)=>{
 
     if(!course) return next(new ErrorResponse(`No course with the id of ${req.params.id}`,404))
 
-    if(course.publisher != req.user.id && req.user.role !== "admin") return next(new ErrorResponse("you cannot carry out this action",400))
+    // if(course.publisher != req.user.id && req.user.role !== "admin") return next(new ErrorResponse("you cannot carry out this action",400))
 
     const title = req.body.title
+    const youtube = req.body.youtube
+    const file = req.file
+    
 
+    
+if(file){
     const uploader = async (path) => await cloudinary.uploads(path , 'coursecontent')
     
     let url;
  
-    const file = req.file
+   
     
     const {path} = file
     
@@ -46,11 +51,21 @@ const uploadCourseContent = asyncHandler(async(req,res,next)=>{
     
     url = newPath.url
     
+    
     fs.unlinkSync(path)
 
-    course.courseContent.push({title,content:url.toString()})
+    course.courseContent.push({title,youtube,content:url.toString()})
+    
+    await course.save()
+
+}else{
+    course.courseContent.push({title,youtube})
 
     await course.save()
+}
+    
+
+  
 
     res.status(200).json({success:true,msg:"successfully uploaded course content",data:course})
 })
@@ -161,6 +176,7 @@ const updateCourseContent = asyncHandler(async(req,res,next)=>{
     const content = course.courseContent[index]
 
     content.title = req.body.title
+    content.youtube = req.body.youtube
 
     const uploader = async (path) => await cloudinary.uploads(path , 'coursecontent')
     

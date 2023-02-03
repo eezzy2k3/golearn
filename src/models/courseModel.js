@@ -37,6 +37,9 @@ const courseSchema = mongoose.Schema({
         },
         content:{
             type:String
+        },
+        youtube:{
+            type:String
         }
     }],
     whatToLearn:{
