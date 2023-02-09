@@ -39,6 +39,10 @@ const userSchema = mongoose.Schema({
     displayPicture:{
         type:String
     },
+    isSubscribed:{
+        type:Boolean,
+        default:false
+    },
     resetToken:String,
     resetTokenExpire:Date
 },{timestamps:true})

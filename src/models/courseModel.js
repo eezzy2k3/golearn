@@ -29,7 +29,6 @@ const courseSchema = mongoose.Schema({
     category:{
         type:String,
         required:true,
-        enum:["Forex","Affiliate Marketing","Financial Trading","Personal Development","Marketing","Design and IT","Business and management"]
     },
     courseContent:[{
         title:{

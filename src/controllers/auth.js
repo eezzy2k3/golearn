@@ -56,7 +56,7 @@ const login = asyncHandler( async(req,res,next)=>{
 
 // cookie function
 const sendCookie = (user,statusCode,res)=>{
-    const token = jwt.sign({id:user._id,email:user.email,userName:user.userName,role:user.role,firstName:user.firstName,lastName:user.lastName},process.env.JWT_SECRET,{expiresIn:"30d"})
+    const token = jwt.sign({id:user._id,email:user.email,userName:user.userName,role:user.role,firstName:user.firstName,lastName:user.lastName,isSubscribed:user.isSubscribed},process.env.JWT_SECRET,{expiresIn:"30d"})
      const options = ({
          expires: new Date(Date.now()+2592000000),
          httpOnly:true
