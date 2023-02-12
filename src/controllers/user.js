@@ -26,4 +26,12 @@ const allPublishers = asyncHandler(async (req,res,next)=>{
 
 })
 
-module.exports = {getAllUsers,allPublishers}
+const getPublisher = asyncHandler(async(req,res,next)=>{
+    const id = req.params.id
+    const publisher = await User.findById(id)
+    if(!publisher) return next(new ErrorResponse(`No Publisher with the id ${id}`,404))
+    if(publisher.role != "publisher") return next(new ErrorResponse("This user is not a publisher",400))
+    return res.status(200).json({success:true,data:publisher})
+})
+
+module.exports = {getAllUsers,allPublishers,getPublisher}

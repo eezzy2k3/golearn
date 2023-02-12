@@ -1,6 +1,6 @@
 const express = require("express")
 const subscribe = require("../controllers/subscription")
-const {getAllUsers, allPublishers} = require("../controllers/user")
+const {getAllUsers, allPublishers, getPublisher} = require("../controllers/user")
 
 const {authorize,access}= require("../middleware/auth")
 
@@ -8,6 +8,9 @@ const {authorize,access}= require("../middleware/auth")
 const router = express.Router()
 
 router.get("/publishers",allPublishers)
+
+router.get("/publishers/:id",getPublisher)
+
 
 router.post("/subscribe",authorize,subscribe)
 
