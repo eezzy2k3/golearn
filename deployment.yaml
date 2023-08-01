@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golearn-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: golearn
+  template:
+    metadata:
+      labels:
+        app: golearn
+    spec:
+      containers:
+        - name: golearn
+          image: eezzy2k3/golearn
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MONGO_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: golearn-config
+                  key: MONGO_URL
+            - name: JWT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: golearn-config
+                  key: JWT_SECRET
+            - name: SMTP_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: golearn-config
+                  key: SMTP_HOST
+            - name: SMTP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: golearn-config
+                  key: SMTP_PORT
+            - name: SMTP_EMAIL
+              valueFrom:
+                configMapKeyRef:
+                  name: golearn-config
+                  key: SMTP_EMAIL
+            - name: SMTP_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: golearn-config
+                  key: SMTP_PASSWORD
+            - name: SMTP_FROM_MAIL
+              valueFrom:
+                configMapKeyRef:
+                  name: golearn-config
+                  key: SMTP_FROM_MAIL
+            - name: CLOUD_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: golearn-config
+                  key: CLOUD_NAME
+            - name: CLOUD_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: golearn-config
+                  key: CLOUD_KEY
+            - name: CLOUD_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: golearn-config
+                  key: CLOUD_SECRET
+            - name: FLW_PUBLIC_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: golearn-config
+                  key: FLW_PUBLIC_KEY
+            - name: FLW_SECRET_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: golearn-config
+                  key: FLW_SECRET_KEY
+            - name: FLW_ENCRYPTION_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: golearn-config
+                  key: FLW_ENCRYPTION_KEY
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: golearn-service
+spec:
+  selector:
+    app: golearn
+  ports:
+    - protocol: TCP
+      port: 30000
+      targetPort: 5000
+  type: LoadBalancer
+

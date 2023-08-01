@@ -87,3 +87,7 @@ if(port == null || port == ""){
 app.listen(port,()=>{
     console.log(`app is listening on ${port}`)
 })
+
+
+
+module.exports = app
