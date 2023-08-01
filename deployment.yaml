@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: golearn
-          image: eezzy2k3/golearn
+          image: 450656936157.dkr.ecr.us-east-2.amazonaws.com/golearn:1.1
           ports:
             - containerPort: 5000
           env:
