@@ -23,11 +23,11 @@ describe("sign up",()=>{
         .send({
           firstName: "israel" ,
           lastName: "Gbose",
-          userName:"ssssssssee",
+          userName:"sssssssssee",
           password: "1234567",
           role: "user",
           phoneNumber: "09864783930",
-          email:"testaaaaddddddfdddd@yahoo.com"
+          email:"testaaaadddddddfdddd@yahoo.com"
 
         })
         expect(request.status).toBe(200)
