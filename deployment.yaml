@@ -98,5 +98,5 @@ spec:
     - protocol: TCP
       port: 30000
       targetPort: 5000
-  type: LoadBalancer
+ 
 
