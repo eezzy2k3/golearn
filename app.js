@@ -81,13 +81,13 @@ app.use(errorHandler)
 
 let port = process.env.PORT
 if(port == null || port == ""){
-    port = 5000
+    port = 5001
 }
 
-app.listen(port,()=>{
+const server = app.listen(port,()=>{
     console.log(`app is listening on ${port}`)
 })
 
 
 
-module.exports = app
+module.exports = {app,server}
