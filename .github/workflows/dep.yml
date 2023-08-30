@@ -61,7 +61,7 @@ jobs:
        
 
     - name: update kube config
-      run: aws eks update-kubeconfig --name golearn
+      run: aws eks update-kubeconfig --name TEST
      
 
     - name: Deploy to eks
