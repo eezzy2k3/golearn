@@ -59,14 +59,13 @@ const limiter = rateLimit({
 	max: 150, // Limit each IP to 150 requests per `window` (here, per 15 minutes)
 })
 
-// Apply the rate limiting middleware to all requests
+// Apply the rate limiting middleware to all requests nh
 app.use(limiter)
 
 // allow cors
 app.use(cors())
 
 app.use(hpp())
-
 
 app.use("/api/v1/course",courseRouter)
 app.use("/api/v1/auth",authRouter)

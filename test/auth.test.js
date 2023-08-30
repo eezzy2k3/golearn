@@ -26,7 +26,7 @@ describe("sign up",()=>{
           userName:"sssssssssee",
           password: "1234567",
           role: "user",
-          phoneNumber: "09864783930",
+          phoneNumber: "098647839307876",
           email:"testaaaadddddddfdddd@yahoo.com"
 
         })
