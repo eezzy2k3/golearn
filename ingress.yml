@@ -2,16 +2,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: golearn
-  # annotations:
-  #   networking.k8s.io/ingress.class: "nginx" # Use networking.k8s.io/ingress.class instead of the deprecated annotation
 spec:
   ingressClassName: "nginx"
   rules:
     - host: eezzy.com.ng
       http:
         paths:
-          - path: /backends
-            pathType: Prefix # Add pathType to specify the path type
+          - pathType: Prefix
+            path: /backends
             backend:
               service:
                 name: golearn-service
