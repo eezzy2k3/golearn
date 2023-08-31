@@ -96,8 +96,8 @@ spec:
     app: golearn
   ports:
     - protocol: TCP
-      port: 5000 # Use the targetPort of your application
-  type: LoadBalancer # Change the service type to LoadBalancer
+      port: 5000 
+  
 
  
 
