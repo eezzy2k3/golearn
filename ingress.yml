@@ -9,7 +9,7 @@ spec:
       http:
         paths:
           - pathType: Prefix
-            path: /backends
+            path: /
             backend:
               service:
                 name: golearn-service
